@@ -8,7 +8,11 @@ public class Player : MonoBehaviour
 
     private CharacterController playerController;
 
-    private Vector3 movementVector = new Vector3();
+    Camera viewCamera;
+
+    private Vector3 movementThreshold = new Vector3();
+
+    public float stopPos;
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +46,14 @@ public class Player : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moxeZ = Input.GetAxis("Vertical");
 
-        movementVector = new Vector3(moveX, 0.0f, moxeZ);
-        playerController.Move(movementVector * Time.deltaTime * moveSpeed);
+        movementThreshold = new Vector3(moveX, 0.0f, moxeZ);
+        playerController.Move(movementThreshold * Time.deltaTime * moveSpeed);
 
+        movementThreshold = movementThreshold.normalized;
+
+        if (movementThreshold.magnitude < stopPos)
+        {
+            movementThreshold = Vector3.zero;
+        }
     }
 }

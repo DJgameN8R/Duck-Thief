@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 4284322502210702998}
   - component: {fileID: -4430948563738092616}
   - component: {fileID: -3316223098996278134}
+  - component: {fileID: -2694983828332063637}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -227,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bcd3f222066cf40bf02a11f47cfffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 12.5
+  stopPos: 0.75
 --- !u!54 &-4430948563738092616
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -240,9 +242,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!143 &-3316223098996278134
 CharacterController:
@@ -262,3 +264,17 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2694983828332063637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614961000735990826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8397d85a3f2ed749a49ea94b47a76ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 6
+  viewAngle: 100
