@@ -1,59 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
+
     public float moveSpeed;
+    private Rigidbody myRigidbody;
 
-    private CharacterController playerController;
+    private Vector3 moveInput;
+    private Vector3 moveVelocity;
 
-    Camera viewCamera;
+    private Camera mainCamera;
 
-    private Vector3 movementThreshold = new Vector3();
-
-    public float stopPos;
-
-    // Start is called before the first frame update
     void Start()
     {
-        playerController = gameObject.GetComponent<CharacterController>();
+        myRigidbody = GetComponent<Rigidbody>();
+        mainCamera = FindObjectOfType<Camera>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-       /* if (Input.GetKey(KeyCode.W))
+        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        moveVelocity = moveInput * moveSpeed;
+
+        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength; 
+
+        if(groundPlane.Raycast(cameraRay, out rayLength))
         {
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            //Debug.DrawLine(cameraRay.origin, pointToLook, Color.white);
+
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
+    }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.forward * -moveSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position = transform.position + new Vector3(-0.1f, 0, 0);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position = transform.position + new Vector3(0.1f, 0, 0);
-        }*/
-
-        float moveX = Input.GetAxis("Horizontal");
-        float moxeZ = Input.GetAxis("Vertical");
-
-        movementThreshold = new Vector3(moveX, 0.0f, moxeZ);
-        playerController.Move(movementThreshold * Time.deltaTime * moveSpeed);
-
-        movementThreshold = movementThreshold.normalized;
-
-        if (movementThreshold.magnitude < stopPos)
-        {
-            movementThreshold = Vector3.zero;
-        }
+    private void FixedUpdate()
+    {
+        myRigidbody.velocity = moveVelocity;
     }
 }
