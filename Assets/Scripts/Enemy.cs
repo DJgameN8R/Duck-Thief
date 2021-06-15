@@ -115,4 +115,3 @@ public class Enemy : MonoBehaviour
 		Gizmos.DrawRay(transform.position, transform.forward * viewDistance);
 	}
 }
-

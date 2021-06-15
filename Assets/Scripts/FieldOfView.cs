@@ -22,6 +22,7 @@ public class FieldOfView : MonoBehaviour
 	public MeshFilter viewMeshFilter;
 	Mesh viewMesh;
 
+
 	void Start()
 	{
 		viewMesh = new Mesh();

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -4430948563738092616}
   - component: {fileID: -2694983828332063637}
   - component: {fileID: 7320120957940905613}
+  - component: {fileID: 6276490951734439213}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8397d85a3f2ed749a49ea94b47a76ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enemy: {fileID: 0}
   viewRadius: 18
   viewAngle: 90
   targetMask:
@@ -136,6 +138,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   visibleTargets: []
+  meshResolution: 0
+  edgeResolveIterations: 0
+  edgeDstThreshold: 0
+  viewMeshFilter: {fileID: 0}
 --- !u!114 &7320120957940905613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +155,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+--- !u!114 &6276490951734439213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614961000735990826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4ff252489a5514f80362e72381c928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableTag: Enemy
+  highlightMaterial: {fileID: 2100000, guid: 8c99ea435da2a5b4e8afed6b52dfcf4a, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 0fa6e4a10eb93c84fb2969c08579c90f, type: 2}
+  player: {fileID: 5614961000735990826}
