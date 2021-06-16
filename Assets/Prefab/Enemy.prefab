@@ -45,7 +45,7 @@ Light:
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 479.66
   m_Range: 10
-  m_SpotAngle: 82
+  m_SpotAngle: 94.710304
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -237,7 +237,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0fa6e4a10eb93c84fb2969c08579c90f, type: 2}
+  - {fileID: 2100000, guid: 8c99ea435da2a5b4e8afed6b52dfcf4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -267,7 +267,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8837209746170199171}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -286,13 +286,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  waitTime: 0.3
+  waitTime: 0.5
   turnSpeed: 90
   spotlight: {fileID: 118965690}
   viewDistance: 7.8
   viewMask:
     serializedVersion: 2
     m_Bits: 512
+  Player: {fileID: 0}
   pathHolder: {fileID: 0}
 --- !u!195 &1263139764
 NavMeshAgent:

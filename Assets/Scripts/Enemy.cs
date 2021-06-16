@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+	public static event System.Action OnGuardHasSpottedPlayer;
+
 	public float speed = 5;
 	public float waitTime = .3f;
 	public float turnSpeed = 90;
+	public float timeToSpotPlayer = .5f;
 
 	public Light spotlight;
 	public float viewDistance;
 	public LayerMask viewMask;
+
 	float viewAngle;
+	float playerVisibleTimer;
+	public GameObject Player;
 
 	public Transform pathHolder;
 	Transform player;
@@ -38,12 +44,23 @@ public class Enemy : MonoBehaviour
 	{
 		if (CanSeePlayer())
 		{
-			spotlight.color = Color.red;
+			transform.LookAt(Player.transform);
+			playerVisibleTimer += Time.deltaTime;
 		}
 		else
 		{
-			spotlight.color = originalSpotlightColour;
+			playerVisibleTimer -= Time.deltaTime;
 		}
+		playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToSpotPlayer);
+		spotlight.color = Color.Lerp(originalSpotlightColour, Color.red, playerVisibleTimer / timeToSpotPlayer);
+
+		if (playerVisibleTimer >= timeToSpotPlayer)
+        {
+			if (OnGuardHasSpottedPlayer != null)
+            {
+				OnGuardHasSpottedPlayer();
+            }
+        }
 	}
 
 	bool CanSeePlayer()
