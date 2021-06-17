@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    public event System.Action OnReachedEndOfLevel;
 
     public float moveSpeed;
     private Rigidbody myRigidbody;
@@ -48,6 +49,18 @@ public class Player : MonoBehaviour
         {
             moveInput = Vector3.zero;
             moveVelocity = Vector3.zero;
+        }
+    }
+
+    private void OnTriggerEnter(Collider hitCollider)
+    {
+        if (hitCollider.tag == "Finish")
+        {
+            Disable();
+            if (OnReachedEndOfLevel != null)
+            {
+                OnReachedEndOfLevel();
+            }
         }
     }
 

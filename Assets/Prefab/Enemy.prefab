@@ -287,7 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   waitTime: 0.5
-  turnSpeed: 90
+  turnSpeed: 100
+  timeToSpotPlayer: 1
   spotlight: {fileID: 118965690}
   viewDistance: 7.8
   viewMask:
