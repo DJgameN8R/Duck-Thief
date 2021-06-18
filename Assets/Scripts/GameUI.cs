@@ -20,13 +20,17 @@ public class GameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameIsOver)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneManager.LoadScene(0);
-            }
-        }
+        
+    }
+
+    public void ReloadCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Duck_Thief_Main_Menu");
     }
 
     void ShowGameWinUI()
