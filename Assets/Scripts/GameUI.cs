@@ -20,7 +20,7 @@ public class GameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ReloadCurrentScene()
@@ -49,5 +49,6 @@ public class GameUI : MonoBehaviour
         gameIsOver = true;
         Enemy.OnGuardHasSpottedPlayer -= ShowGameLoseUI;
         FindObjectOfType<Player>().OnReachedEndOfLevel -= ShowGameWinUI;
+        
     }
 }

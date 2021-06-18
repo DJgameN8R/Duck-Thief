@@ -23,44 +23,55 @@ public class Enemy : MonoBehaviour
 	Transform player;
 	Color originalSpotlightColour;
 
+	private GameManager gameManager;
+
 	void Start()
 	{
+		gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		viewAngle = spotlight.spotAngle;
 		originalSpotlightColour = spotlight.color;
 
-		Vector3[] waypoints = new Vector3[pathHolder.childCount];
-		for (int i = 0; i < waypoints.Length; i++)
-		{
-			waypoints[i] = pathHolder.GetChild(i).position;
-			waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
-		}
+			Vector3[] waypoints = new Vector3[pathHolder.childCount];
+			for (int i = 0; i < waypoints.Length; i++)
+			{
+				waypoints[i] = pathHolder.GetChild(i).position;
+				waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
+			}
 
-		StartCoroutine(FollowPath(waypoints));
 
+			StartCoroutine(FollowPath(waypoints));
 	}
 
 	void Update()
 	{
-		if (CanSeePlayer())
+		if (gameManager.gameState == GameState.preGame)
 		{
-			transform.LookAt(Player.transform);
-			playerVisibleTimer += Time.deltaTime;
+				gameManager.gameState = GameState.game;
 		}
-		else
-		{
-			playerVisibleTimer -= Time.deltaTime;
-		}
-		playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToSpotPlayer);
-		spotlight.color = Color.Lerp(originalSpotlightColour, Color.red, playerVisibleTimer / timeToSpotPlayer);
 
-		if (playerVisibleTimer >= timeToSpotPlayer)
-        {
-			if (OnGuardHasSpottedPlayer != null)
-            {
-				OnGuardHasSpottedPlayer();
-            }
-        }
+		if (gameManager.gameState == GameState.game)
+		{
+			if (CanSeePlayer())
+			{
+				transform.LookAt(Player.transform);
+				playerVisibleTimer += Time.deltaTime;
+			}
+			else
+			{
+				playerVisibleTimer -= Time.deltaTime;
+			}
+			playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToSpotPlayer);
+			spotlight.color = Color.Lerp(originalSpotlightColour, Color.red, playerVisibleTimer / timeToSpotPlayer);
+
+			if (playerVisibleTimer >= timeToSpotPlayer)
+			{
+				if (OnGuardHasSpottedPlayer != null)
+				{
+					OnGuardHasSpottedPlayer();
+				}
+			}
+		}
 	}
 
 	bool CanSeePlayer()
@@ -82,24 +93,24 @@ public class Enemy : MonoBehaviour
 
 	IEnumerator FollowPath(Vector3[] waypoints)
 	{
-		transform.position = waypoints[0];
+			transform.position = waypoints[0];
 
-		int targetWaypointIndex = 1;
-		Vector3 targetWaypoint = waypoints[targetWaypointIndex];
-		transform.LookAt(targetWaypoint);
+			int targetWaypointIndex = 1;
+			Vector3 targetWaypoint = waypoints[targetWaypointIndex];
+			transform.LookAt(targetWaypoint);
 
-		while (true)
-		{
-			transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
-			if (transform.position == targetWaypoint)
+			while (true)
 			{
-				targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
-				targetWaypoint = waypoints[targetWaypointIndex];
-				yield return new WaitForSeconds(waitTime);
-				yield return StartCoroutine(TurnToFace(targetWaypoint));
+				transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
+				if (transform.position == targetWaypoint)
+				{
+					targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
+					targetWaypoint = waypoints[targetWaypointIndex];
+					yield return new WaitForSeconds(waitTime);
+					yield return StartCoroutine(TurnToFace(targetWaypoint));
+				}
+				yield return null;
 			}
-			yield return null;
-		}
 	}
 
 	IEnumerator TurnToFace(Vector3 lookTarget)

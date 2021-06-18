@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggleToggle : MonoBehaviour
+public class Button : MonoBehaviour
 {
 	public enum ToggleType { turnOn, turnOff, toggle }
 
