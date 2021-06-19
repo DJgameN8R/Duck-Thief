@@ -15,12 +15,6 @@ public class GameManager : MonoBehaviour
 
         //int thing = 0;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
 
 public enum GameState { preGame, game, dead };

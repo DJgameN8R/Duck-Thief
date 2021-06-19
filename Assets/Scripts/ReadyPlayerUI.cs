@@ -17,10 +17,12 @@ public class ReadyPlayerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (gameManager.gameState == GameState.preGame)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                Debug.Log("Space was pressed");
                 gameManager.gameState = GameState.game;
                 readyPlayerUI.SetActive(false);
             }

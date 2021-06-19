@@ -29,12 +29,13 @@ public class Player : MonoBehaviour
     {
         if (gameManager.gameState == GameState.preGame)
         {
-
-           gameManager.gameState = GameState.game;
-
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                gameManager.gameState = GameState.game;
+            }
         }
 
-        if (gameManager.gameState == GameState.game)
+            if (gameManager.gameState == GameState.game)
         {
             if (!disabled)
             {
@@ -65,7 +66,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider hitCollider)
+    void OnTriggerEnter(Collider hitCollider)
     {
         if (hitCollider.tag == "Finish")
         {
@@ -82,12 +83,12 @@ public class Player : MonoBehaviour
         disabled = true;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         myRigidbody.velocity = moveVelocity;
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
         Enemy.OnGuardHasSpottedPlayer -= Disable;
     }

@@ -46,8 +46,11 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		if (gameManager.gameState == GameState.preGame)
-		{
-				gameManager.gameState = GameState.game;
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                gameManager.gameState = GameState.game;
+            }
 		}
 
 		if (gameManager.gameState == GameState.game)
