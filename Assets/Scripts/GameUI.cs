@@ -8,7 +8,7 @@ public class GameUI : MonoBehaviour
 
     public GameObject gameLoseUI;
     public GameObject gameWinUI;
-    bool gameIsOver;
+    public bool gameIsOver;
 
 
     // Start is called before the first frame update

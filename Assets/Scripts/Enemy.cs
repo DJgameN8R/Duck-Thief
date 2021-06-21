@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour
 				if (OnGuardHasSpottedPlayer != null)
 				{
 					OnGuardHasSpottedPlayer();
+
 				}
 			}
 		}
